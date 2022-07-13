@@ -6,6 +6,8 @@ const s3Client = new S3()
 export const listBucketHandler = async(event:any, context:any) => {
 
     const mybuckets = await s3Client.listBuckets().promise();
+    console.log("Got an event ####")
+    console.log(event);
     return{
         statusCode: 200,
         body: JSON.stringify({

@@ -3,5 +3,4 @@
 @endpoint =https://y9cqbjv73f.execute-api.us-east-1.amazonaws.com/prod/
 
  GET {{endpoint}}/hello
- ###/prod/hello
-
+###
