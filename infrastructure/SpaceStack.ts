@@ -15,7 +15,8 @@ export class SpaceStack extends Stack {
     private SpaceTable = new GenericTable(this,{
         tableName:'SpaceFinder-01',
         primaryKey:'sp-Id',
-        createLambdaPath:'Create'
+        createLambdaPath:'Create',
+        readLambdaPath:'Read'
     } ) 
 
     constructor(scope: Construct, id: string, props: StackProps) {
@@ -49,6 +50,9 @@ export class SpaceStack extends Stack {
         this.api.root.addResource('hello').addMethod('GET', new LambdaIntegration(listMyBucketsLambda));
 
         // space api integration
-        this.api.root.addResource('spaces').addMethod('POST', this.SpaceTable.createLambdaIntegration);
+        const spaceResource = this.api.root.addResource('spaces')
+        spaceResource.addMethod('POST', this.SpaceTable.createLambdaIntegration);
+        spaceResource.addMethod('GET', this.SpaceTable.readLambdaIntegration);
+
     }
 }

@@ -14,7 +14,8 @@
             ],
             "env": {
                 "AWS_REGION": "us-east-1",
-                "TABLE_NAME":"SpaceFinder-01"
+                "TABLE_NAME":"SpaceFinder-01",
+                "PRIMARY_KEY":"sp-Id",
             }
         }
     ]

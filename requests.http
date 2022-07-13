@@ -5,12 +5,21 @@
  GET {{endpoint}}/hello
 ###
 
+
+
+GET {{endpoint}}/spaces
+###
+
+
+GET {{endpoint}}/spaces?sp-Id=c17c1b47-56e3-4d17-a609-40f6ec658a6e
+###
+
 POST  {{endpoint}}/spaces/
 Content-Type: application/json
 
 {
-    "name": "test-space",
-    "location": "test-space-location"
+    "name": "test-spacedd",
+    "location": "test-space-locationdd"
 }
 
 ###
