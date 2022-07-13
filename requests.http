@@ -4,3 +4,13 @@
 
  GET {{endpoint}}/hello
 ###
+
+POST  {{endpoint}}/spaces/
+Content-Type: application/json
+
+{
+    "name": "test-space",
+    "location": "test-space-location"
+}
+
+###

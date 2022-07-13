@@ -11,7 +11,12 @@ export class SpaceStack extends Stack {
 
     private api = new RestApi(this, 'SpaceFinderApi')
     // dynamo DB
-    private SpaceTable = new GenericTable('SpaceFinder-01', 'sp-Id', this)
+    // private SpaceTable = new GenericTable('SpaceFinder-01', 'sp-Id', this) //old way
+    private SpaceTable = new GenericTable(this,{
+        tableName:'SpaceFinder-01',
+        primaryKey:'sp-Id',
+        createLambdaPath:'Create'
+    } ) 
 
     constructor(scope: Construct, id: string, props: StackProps) {
         super(scope, id, props)
@@ -42,5 +47,8 @@ export class SpaceStack extends Stack {
 
         // api intergration
         this.api.root.addResource('hello').addMethod('GET', new LambdaIntegration(listMyBucketsLambda));
+
+        // space api integration
+        this.api.root.addResource('spaces').addMethod('POST', this.SpaceTable.createLambdaIntegration);
     }
 }
