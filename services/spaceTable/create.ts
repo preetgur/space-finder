@@ -6,11 +6,12 @@ import { v4 } from "uuid";
 const dbClient = new DynamoDB.DocumentClient()
 
 async function handler(event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> {
+    
+    const item = typeof event.body ==="object" ? event.body : JSON.parse(event.body)
+    item['sp-Id'] = v4()
     const params = {
         TableName: "SpaceFinder-01",
-        Item: {
-            "sp-Id": v4(),
-        }
+        Item: item
     }
     const result: APIGatewayProxyResult = {
         statusCode: 200,
@@ -22,6 +23,7 @@ async function handler(event: APIGatewayProxyEvent, context: Context): Promise<A
     } catch (error: any) {
         result.body = error?.message
     }
+    result.body = `Item created with id: ${item['sp-Id']}`
     return result
 }
 

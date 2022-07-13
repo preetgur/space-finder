@@ -3,4 +3,9 @@ import { handler } from "../../services/spaceTable/create";
 
 // listBucketHandler({}, {});
 
-handler({} as any, {} as any);
+const event = { 
+    body:{
+    location: "Rajpura",
+}}
+
+handler(event as any, {} as any);
