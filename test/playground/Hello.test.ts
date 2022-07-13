@@ -1,3 +1,6 @@
 import { listBucketHandler } from "../../services/buckets/bucket";
+import { handler } from "../../services/spaceTable/create";
 
-listBucketHandler({}, {});
+// listBucketHandler({}, {});
+
+handler({} as any, {} as any);
