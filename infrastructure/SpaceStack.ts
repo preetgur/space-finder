@@ -2,14 +2,17 @@ import { Stack, StackProps } from 'aws-cdk-lib'
 import { Construct } from 'constructs';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import { join } from 'path'
-import { LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
+import { AuthorizationType, LambdaIntegration, MethodOptions, RestApi } from 'aws-cdk-lib/aws-apigateway';
 import { GenericTable } from './GenericTable';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import { AuthorizerWrapper } from './auth/AuthWrapper';
 
 export class SpaceStack extends Stack {
 
     private api = new RestApi(this, 'SpaceFinderApi')
+    private authorizer: AuthorizerWrapper;
+
     // dynamo DB
     // private SpaceTable = new GenericTable('SpaceFinder-01', 'sp-Id', this) //old way
     private SpaceTable = new GenericTable(this,{
@@ -24,6 +27,8 @@ export class SpaceStack extends Stack {
 
     constructor(scope: Construct, id: string, props: StackProps) {
         super(scope, id, props)
+
+        this.authorizer = new AuthorizerWrapper(this, this.api);
 
         // const helloLambda = new lambda.Function(this, 'HelloLambda', {
         //     runtime: lambda.Runtime.NODEJS_14_X,
@@ -49,8 +54,17 @@ export class SpaceStack extends Stack {
         // add the policy statement to the lambda function
         listMyBucketsLambda.addToRolePolicy(s3PolicyStatement)
 
+        const optionsWithAuthorizer: MethodOptions = {
+            authorizationType: AuthorizationType.COGNITO,
+            authorizer: {
+                authorizerId: this.authorizer.authorizer.authorizerId
+            }
+        }
+
+
         // api intergration
-        this.api.root.addResource('hello').addMethod('GET', new LambdaIntegration(listMyBucketsLambda));
+        const helloResource = this.api.root.addResource('hello')
+        helloResource.addMethod('GET', new LambdaIntegration(listMyBucketsLambda),optionsWithAuthorizer);
 
         // space api integration
         const spaceResource = this.api.root.addResource('spaces')
