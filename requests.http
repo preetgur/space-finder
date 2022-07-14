@@ -11,11 +11,11 @@ GET {{endpoint}}/spaces
 ###
 
 # with primary key
-GET {{endpoint}}/spaces?sp-Id=c17c1b47-56e3-4d17-a609-40f6ec658a6e
+GET {{endpoint}}/spaces?sp-Id=afe38874-d0f7-425a-8cc1-b8d8db2eb244
 ###
 
 # with secondary key
-GET {{endpoint}}/spaces?name=Rajpura
+GET {{endpoint}}/spaces?location=Rajpura
 ###
 
 POST  {{endpoint}}/spaces/
@@ -27,11 +27,13 @@ Content-Type: application/json
 }
 
 ###
-PUT {{endpoint}}/spaces?sp-Id=c17c1b47-56e3-4d17-a609-40f6ec658a6e
-
+PUT {{endpoint}}/spaces?sp-Id=afe38874-d0f7-425a-8cc1-b8d8db2eb244
 Content-Type: application/json
 
 {
     "location": "Updated Location"
 }
+###
+
+DELETE {{endpoint}}/spaces?sp-Id=c17c1b47-56e3-4d17-a609-40f6ec658a6e
 ###
