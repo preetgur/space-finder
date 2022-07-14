@@ -1,8 +1,9 @@
-import { listBucketHandler } from "../../services/buckets/bucket";
+// import { listBucketHandler } from "../../services/buckets/bucket";
 // import { handler } from "../../services/SpaceFinder-01/Read";
 // import { handler } from "../../services/spaceTable/create";
-import { handler } from "../../services/SpaceFinder-01/Update";
+// import { handler } from "../../services/SpaceFinder-01/Update";
 // import { handler } from "../../services/SpaceFinder-01/Delete";
+import { handler } from "../../services/SpaceFinder-01/Create";
 
 import { APIGatewayProxyEvent } from 'aws-lambda';
 
@@ -11,10 +12,10 @@ import { APIGatewayProxyEvent } from 'aws-lambda';
 // handler({} as any, {} as any);
 
 
-// const event = { 
-//     body:{
-//     location: "Rajpura",
-// }}
+const event :APIGatewayProxyEvent= { 
+    body:{
+    location: "Rajpura",
+}} as any;
 
 // handler(event as any, {} as any);
 
@@ -27,14 +28,14 @@ import { APIGatewayProxyEvent } from 'aws-lambda';
 // } as any
 
 // ###### PUT body ######
-const event: APIGatewayProxyEvent = {
-    queryStringParameters: {
-        "sp-Id": 'afe38874-d0f7-425a-8cc1-b8d8db2eb244'
-    },
-    body: {
-        location: 'new location'
-    }
-} as any;
+// const event: APIGatewayProxyEvent = {
+//     queryStringParameters: {
+//         "sp-Id": 'afe38874-d0f7-425a-8cc1-b8d8db2eb244'
+//     },
+//     body: {
+//         location: 'new location'
+//     }
+// } as any;
 
 //##### DELETE body ######
 // const event: APIGatewayProxyEvent = {
