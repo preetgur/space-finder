@@ -19,7 +19,7 @@ import { APIGatewayProxyEvent } from 'aws-lambda';
 // ###### query parameters ######
 const event:APIGatewayProxyEvent = {
     queryStringParameters: {
-        "sp-Id": "4a185275-fed3-4c3d-be79-3d550914f8aa",
+        location: 'Rajpura',
     }
 } as any
 

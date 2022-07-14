@@ -10,8 +10,12 @@
 GET {{endpoint}}/spaces
 ###
 
-
+# with primary key
 GET {{endpoint}}/spaces?sp-Id=c17c1b47-56e3-4d17-a609-40f6ec658a6e
+###
+
+# with secondary key
+GET {{endpoint}}/spaces?name=Rajpura
 ###
 
 POST  {{endpoint}}/spaces/
